@@ -1,24 +1,62 @@
-var mongoose = require('mongoose');
-var bcrypt   = require('bcrypt-nodejs');
+import bcrypt from 'bcrypt-nodejs';
+import { find } from 'lodash';
 
-// define the schema for our user model
-var userSchema = mongoose.Schema({
+export default class FakeUserStore {
 
-    username      : String,
-    password     : String,
+  // TODO: use async api for bcrypt
+  // https://github.com/kelektiv/node.bcrypt.js#api
 
-});
+  constructor() {
+    this.users = [
+      { username: 'user1', hashedPassword: this.generateHash('pass1'), id: 0 },
+      { username: 'user2', hashedPassword: this.generateHash('pass2'), id: 1 },
+    ];
+  }
 
-// methods ======================
-// generating a hash
-userSchema.methods.generateHash = function(password) {
+  userExists(username) {
+    return (find(this.users, { username }) !== undefined);
+  }
+
+  getUser(username) {
+    return find(this.users, { username });
+  }
+
+  addUser(username, password) {
+    if (this.userExists(username)) {
+      throw new Error('user already exists');
+    }
+
+    const newUser = {
+      username,
+      hashedPassword: this.generateHash(password),
+      id: this.users.length + 1,
+    };
+
+    this.users.push(newUser);
+
+    return newUser;
+  }
+
+  /**
+   * @param {string} username
+   * @param {string} password
+   *
+   * @return {boolean}
+   */
+  validateUser(username, password) {
+    if (!this.userExists(username)) {
+      throw new Error('user does not exist');
+    }
+
+    const user = this.getUser(username);
+
+    const passMatches = bcrypt.compareSync(password, user.hashedPassword);
+
+    return passMatches;
+  }
+
+  generateHash(password) {
     return bcrypt.hashSync(password, bcrypt.genSaltSync(10), null);
-};
+  }
 
-// checking if password is valid
-userSchema.methods.validPassword = function(password) {
-    return bcrypt.compareSync(password, this.password);
-};
-
-// create the model for users and expose it to our app
-module.exports = mongoose.model('User', userSchema);
+}

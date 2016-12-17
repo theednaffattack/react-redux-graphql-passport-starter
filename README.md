@@ -1,10 +1,8 @@
 # react-redux-graphql-passport-starter
 
-[![npm version](https://badge.fury.io/js/react-apollo.svg)](https://badge.fury.io/js/react-apollo)
-[![Get on Slack](https://img.shields.io/badge/slack-join-orange.svg)](http://www.apollostack.com/#slack)
-[![Build Status](https://travis-ci.org/apollostack/react-apollo.svg?branch=master)](https://travis-ci.org/apollostack/react-apollo)
+an example for react-redux apollo/graphql application, with passport backend support using a fake dev-only in-memory user storage.
 
-an example for react-redux apollo/graphql application, with mongo passport backend support.
+based on https://github.com/mtiger2k/react-redux-graphql-passport-starter but without the mongo, and with some style cleanup.
 
 ## About
 
@@ -20,7 +18,6 @@ This is a starter boilerplate app I've put together using the following technolo
 * [react-apollo](https://github.com/apollostack/react-apollo) Use your GraphQL server data in your React components, with the Apollo Client.
 * [apollo-client](https://github.com/apollostack/apollo-client) Apollo Client can be used in any JavaScript frontend where you want to use data from a GraphQL server.
 * [Express](http://expressjs.com)
-* [Mongoose](https://github.com/Automattic/mongoose)
 * [passport](https://github.com/jaredhanson/passport)
 * [passport-local](https://github.com/jaredhanson/passport-local)
 * [Babel](http://babeljs.io) for ES6 and ES7 magic
@@ -63,4 +60,4 @@ Express with apollo server, using passport to authenticate.
 ---
 Thanks for checking this out.
 
-– Scott, Tian, [shaoqin.tian@hpe.com]
+Mongo version by Scott, Tian, [shaoqin.tian@hpe.com]

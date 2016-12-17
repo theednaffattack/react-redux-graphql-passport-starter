@@ -11,7 +11,9 @@ import schema from './schema';
 import * as CounterService from './services/countService'
 import { setupLocalLogin } from './localLogin'
 
-require('dotenv').config();
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const API_PORT = process.env.API_PORT;
 

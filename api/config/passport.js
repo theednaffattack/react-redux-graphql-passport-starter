@@ -1,9 +1,8 @@
 import { Strategy as LocalStrategy } from 'passport-local';
 import { Strategy as JwtStrategy, ExtractJwt } from 'passport-jwt';
-
-import FakeUserStore from '../models/user.js';
-
 import dotenv from 'dotenv';
+
+import FakeUserStore from '../models/user';
 
 dotenv.config();
 

@@ -32,19 +32,7 @@ module.exports = {
     extensions: ['', '.js'],
     root: path.join(__dirname, 'src')
   },
-    eslint: {
-        configFile: '.eslintrc',
-        failOnWarning: false,
-        failOnError: false
-    },
   module: {
-    preLoaders: [
-        {
-            test: /\.js$/,
-            exclude: /node_modules/,
-            loader: 'eslint'
-        }
-    ],
     loaders: [{
       test: /\.jsx?$/,
       loaders: ['babel?cacheDirectory'],

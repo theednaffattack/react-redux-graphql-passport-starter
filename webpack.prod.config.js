@@ -45,25 +45,12 @@ module.exports = {
     extensions: ['', '.js'],
     root: path.join(__dirname, 'src')
   },
-
-    // ESLint options
-    eslint: {
-        configFile: '.eslintrc',
-        failOnWarning: false,
-        failOnError: true
-    },
-
   module: {
     preLoaders: [
       {
         test: /\.css$/,
         loader: 'stripcomment'
       },
-    {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        loader: 'eslint'
-    }
     ],
     loaders: [{
       test: /\.js$/,

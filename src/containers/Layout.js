@@ -4,7 +4,7 @@ import { Link } from 'react-router';
 import NavbarLink from '../components/NavbarLink';
 import Profile from '../components/Profile';
 
-const Layout = ({ children, params, location }) => (
+const Layout = ({ children, /* params, */ location }) => (
   <div>
     <nav className="navbar navbar-default">
       <div className="container">

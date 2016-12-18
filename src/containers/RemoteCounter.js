@@ -1,14 +1,14 @@
-import React from 'react'
-import { graphql, compose } from 'react-apollo'
-import gql from 'graphql-tag'
-import update from 'react-addons-update'
-import { Row, Button } from 'react-bootstrap'
+import React from 'react';
+import { graphql, compose } from 'react-apollo';
+import gql from 'graphql-tag';
+import update from 'react-addons-update';
+import { Row, Button } from 'react-bootstrap';
 
 const SUBSCRIPTION_QUERY = gql`
   subscription onCountUpdated {
-    countUpdated {
-      amount
-    }
+  countUpdated {
+    amount
+  }
   }
 `;
 
@@ -16,26 +16,26 @@ class Counter extends React.Component {
 
   constructor(args) {
     super(args);
-      this.subscription = null;
+    this.subscription = null;
   }
 
   componentWillReceiveProps(nextProps) {
-      if (!this.subscription && !nextProps.loading) {
-          this.subscription = this.props.subscribeToMore({
-              document: SUBSCRIPTION_QUERY,
-              variables: {},
-              updateQuery: (previousResult, { subscriptionData }) => {
-                  let newAmount = subscriptionData.data.countUpdated.amount;
-                  return update(previousResult, {
-                      count: {
-                          amount: {
-                              $set: newAmount,
-                          },
-                      },
-                  });
-              }
+    if (!this.subscription && !nextProps.loading) {
+      this.subscription = this.props.subscribeToMore({
+        document: SUBSCRIPTION_QUERY,
+        variables: {},
+        updateQuery: (previousResult, { subscriptionData }) => {
+          const newAmount = subscriptionData.data.countUpdated.amount;
+          return update(previousResult, {
+            count: {
+              amount: {
+                $set: newAmount,
+              },
+            },
           });
-      }
+        },
+      });
+    }
   }
 
   render() {
@@ -46,19 +46,21 @@ class Counter extends React.Component {
           Loading...
         </Row>
       );
-    } else {
-      return (
-        <Row>
-          <div>
-            Current count, is {count.amount}. This is being stored server-side in the database and using Apollo subscription for real-time updates.
-          </div>
-          <br />
-          <Button bsStyle="primary" onClick={addCount(1)}>
-            Click to increase count
-          </Button>
-        </Row>
-      );
     }
+
+    return (
+      <Row>
+        <div>
+          Current count, is {count.amount}.
+          This is being stored server-side in the database
+          and using Apollo subscription for real-time updates.
+        </div>
+        <br />
+        <Button bsStyle="primary" onClick={addCount(1)}>
+          Click to increase count
+        </Button>
+      </Row>
+    );
   }
 }
 
@@ -67,32 +69,32 @@ Counter.propTypes = {
   count: React.PropTypes.object,
   updateCountQuery: React.PropTypes.func,
   addCount: React.PropTypes.func.isRequired,
-  subscribeToMore: React.PropTypes.func.isRequired
+  subscribeToMore: React.PropTypes.func.isRequired,
 };
 
 const AMOUNT_QUERY = gql`
   query getCount {
-    count {
-      amount
-    }
+  count {
+    amount
+  }
   }
 `;
 
 const ADD_COUNT_MUTATION = gql`
   mutation addCount(
-    $amount: Int!
+  $amount: Int!
   ) {
-    addCount(amount: $amount) {
-      amount
-    }
+  addCount(amount: $amount) {
+    amount
+  }
   }
 `;
 
 export default compose(
   graphql(AMOUNT_QUERY, {
-    props({data: {loading, count, subscribeToMore}}) {
-      return {loading, count, subscribeToMore};
-    }
+    props({ data: { loading, count, subscribeToMore } }) {
+      return { loading, count, subscribeToMore };
+    },
   }),
   graphql(ADD_COUNT_MUTATION, {
     props: ({ ownProps, mutate }) => ({
@@ -121,5 +123,5 @@ export default compose(
         });
       },
     }),
-  })
+  }),
 )(Counter);

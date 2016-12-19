@@ -1,8 +1,10 @@
-var count = 0;
-export const addCount = function() {
-	return Promise.resolve({amount:++count});
+let count = 0;
+
+export function addCount() {
+  count += 1;
+  return Promise.resolve({ amount: count });
 }
 
-export const getCount = function() {
-	return Promise.resolve({amount: count});
+export function getCount() {
+  return Promise.resolve({ amount: count });
 }

@@ -1,6 +1,5 @@
-import express from 'express';
 import passport from 'passport';
-import jwt from 'jwt-simple'
+import jwt from 'jwt-simple';
 import dotenv from 'dotenv';
 
 import configPassport from './config/passport';
@@ -16,7 +15,7 @@ function tokenForUser(user) {
   }, process.env.SECRET);
 }
 
-export function setupLocalLogin(app) {
+export default function setupLocalLogin(app) {
   configPassport(passport);
 
   // sign up and sign in are handled by auth controller
@@ -41,5 +40,4 @@ export function setupLocalLogin(app) {
       res.send(null);
     }
   });
-
 }

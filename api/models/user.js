@@ -8,8 +8,8 @@ export default class FakeUserStore {
 
   constructor() {
     this.users = [
-      { username: 'user1', hashedPassword: this.generateHash('pass1'), id: 0 },
-      { username: 'user2', hashedPassword: this.generateHash('pass2'), id: 1 },
+      { username: 'user1', hashedPassword: generateHash('pass1'), id: 0 },
+      { username: 'user2', hashedPassword: generateHash('pass2'), id: 1 },
     ];
   }
 
@@ -28,7 +28,7 @@ export default class FakeUserStore {
 
     const newUser = {
       username,
-      hashedPassword: this.generateHash(password),
+      hashedPassword: generateHash(password),
       id: this.users.length + 1,
     };
 
@@ -55,8 +55,8 @@ export default class FakeUserStore {
     return passMatches;
   }
 
-  generateHash(password) {
-    return bcrypt.hashSync(password, bcrypt.genSaltSync(10), null);
-  }
+}
 
+function generateHash(password) {
+  return bcrypt.hashSync(password, bcrypt.genSaltSync(10), null);
 }

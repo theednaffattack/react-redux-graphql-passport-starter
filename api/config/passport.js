@@ -6,7 +6,7 @@ import FakeUserStore from '../models/user';
 
 dotenv.config();
 
-export default function passport(passport) {
+export default function passportConfig(passport) {
   const userStore = new FakeUserStore();
 
   const strategyOptions = {

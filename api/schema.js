@@ -13,7 +13,6 @@ type Count {
 type Query {
   # Counter
   count: Count
-  
 }
 
 type Mutation {
@@ -39,26 +38,26 @@ schema {
 
 
 const rootResolvers = {
-    Query: {
-        count(ignored1, ignored2, context) {
-            return context.counterService.getCount();
-        },
+  Query: {
+    count(ignored1, ignored2, context) {
+      return context.counterService.getCount();
     },
-    Mutation: {
-        addCount(_, { amount }, context) {
-            return context.counterService.addCount(amount)
-                    .then(() => context.counterService.getCount())
-        .then(count => {
-                pubsub.publish('countUpdated', count);
-            return count;
+  },
+  Mutation: {
+    addCount(_, { amount }, context) {
+      return context.counterService.addCount(amount)
+        .then(() => context.counterService.getCount())
+        .then((count) => {
+          pubsub.publish('countUpdated', count);
+          return count;
         });
-        },
     },
-    Subscription: {
-        countUpdated(amount) {
-            return amount;
-        }
-    }
+  },
+  Subscription: {
+    countUpdated(amount) {
+      return amount;
+    },
+  },
 };
 
 
@@ -68,10 +67,10 @@ const schema = [...rootSchema];
 const resolvers = merge(rootResolvers);
 
 const executableSchema = makeExecutableSchema({
-    typeDefs: schema,
-    resolvers,
+  typeDefs: schema,
+  resolvers,
 });
 
-addErrorLoggingToSchema(executableSchema, { log: (e) => console.log(e) });
+addErrorLoggingToSchema(executableSchema, { log: e => console.log(e) });
 
 export default executableSchema;

@@ -30,7 +30,7 @@ export default function setupLocalLogin(app) {
     });
   });
 
-  app.get('/user', passport.authenticate('jwt', { session: false }), (req, res) => {
+  app.post('/user', passport.authenticate('jwt', { session: false }), (req, res) => {
     if (req.user) {
       res.send({
         id: req.user.id,

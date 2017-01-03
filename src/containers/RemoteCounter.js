@@ -37,7 +37,7 @@ class Counter extends React.Component {
         variables: {},
         updateQuery: (previousResult, { subscriptionData }) => {
           const newAmount = subscriptionData.data.countUpdated.amount;
-          const newErrorMessage = mutationResult.data.addCount.errorMessage;
+          const newErrorMessage = subscriptionData.data.addCount.errorMessage;
           return update(previousResult, {
             count: {
               amount: {

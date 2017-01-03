@@ -34,6 +34,7 @@
     "graphql-tag": "^1.1.2",
     "graphql-tools": "^0.8.3",
     "http-proxy-middleware": "^0.17.2",
+    "immutability-helper": "^2.0.0",
     "jwt-decode": "^2.1.0",
     "jwt-simple": "^0.5.1",
     "lodash": "^4.17.2",
@@ -42,7 +43,6 @@
     "passport-jwt": "^2.2.1",
     "passport-local": "^1.0.0",
     "react": "^15.4.1",
-    "react-addons-update": "^15.4.1",
     "react-apollo": "^0.6.0",
     "react-bootstrap": "^0.30.7",
     "react-dom": "^15.4.1",
@@ -110,9 +110,17 @@
       "indent": [
         "error",
         2,
-        { "SwitchCase": 1 }
+        {
+          "SwitchCase": 1
+        }
       ],
-      "no-unused-vars": [2, {"vars": "all", "args": "after-used"}],
+      "no-unused-vars": [
+        2,
+        {
+          "vars": "all",
+          "args": "after-used"
+        }
+      ],
       "react/jsx-uses-react": 2,
       "react/jsx-uses-vars": 2,
       "react/react-in-jsx-scope": 2

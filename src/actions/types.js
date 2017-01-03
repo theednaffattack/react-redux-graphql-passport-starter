@@ -9,3 +9,6 @@ export const FETCH_USER_FAILED = 'FETCH_USER_FAILED';
 export const SIGN_OUT = 'SIGN_OUT';
 
 export const ADD_COUNTER = 'ADD_COUNTER';
+
+export const SET_ERROR = 'SET_ERROR';
+export const DISMISS_ERROR = 'DISMISS_ERROR';

@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 
 import NavbarLink from '../components/NavbarLink';
 import Profile from '../components/Profile';
+import Errors from '../containers/Errors'
 
 const Layout = ({ children, /* params, */ location }) => (
   <div>
@@ -39,6 +40,7 @@ const Layout = ({ children, /* params, */ location }) => (
         <Profile />
       </div>
     </nav>
+    <Errors />
     <div className="container">
       {children}
     </div>

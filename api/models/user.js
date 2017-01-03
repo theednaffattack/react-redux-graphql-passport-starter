@@ -8,8 +8,18 @@ export default class FakeUserStore {
 
   constructor() {
     this.users = [
-      { username: 'user1', hashedPassword: generateHash('pass1'), id: 0 },
-      { username: 'user2', hashedPassword: generateHash('pass2'), id: 1 },
+      {
+        username: 'user1',
+        hashedPassword: generateHash('pass1'),
+        roles: ['admin'],
+        id: 0,
+      },
+      {
+        username: 'user2',
+        hashedPassword: generateHash('pass2'),
+        roles: [],
+        id: 1,
+      },
     ];
   }
 
@@ -29,6 +39,7 @@ export default class FakeUserStore {
     const newUser = {
       username,
       hashedPassword: generateHash(password),
+      roles: [],
       id: this.users.length + 1,
     };
 

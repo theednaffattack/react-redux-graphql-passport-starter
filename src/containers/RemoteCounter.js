@@ -74,19 +74,19 @@ Counter.propTypes = {
 
 const AMOUNT_QUERY = gql`
   query getCount {
-  count {
-    amount
-  }
+    count {
+      amount
+    }
   }
 `;
 
 const ADD_COUNT_MUTATION = gql`
   mutation addCount(
-  $amount: Int!
+    $amount: Int!
   ) {
-  addCount(amount: $amount) {
-    amount
-  }
+    addCount(amount: $amount) {
+      amount
+    }
   }
 `;
 

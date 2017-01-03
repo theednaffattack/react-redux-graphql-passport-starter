@@ -39,18 +39,22 @@ schema {
 
 const rootResolvers = {
   Query: {
-    count(ignored1, ignored2, context) {
+    count(root, args, context) {
       return context.counterService.getCount();
     },
   },
   Mutation: {
-    addCount(_, { amount }, context) {
-      return context.counterService.addCount(amount)
-        .then(() => context.counterService.getCount())
-        .then((count) => {
-          pubsub.publish('countUpdated', count);
-          return count;
-        });
+    addCount(root, { amount }, context) {
+      if (context.user.roles.indexOf('admin') > -1) {
+        return context.counterService.addCount(amount)
+          .then(() => context.counterService.getCount())
+          .then((count) => {
+            pubsub.publish('countUpdated', count);
+            return count;
+          });
+      } else {
+        throw new Error('not admin, cannot update count!');
+      }
     },
   },
   Subscription: {

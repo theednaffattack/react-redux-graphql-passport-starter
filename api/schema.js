@@ -8,6 +8,7 @@ const rootSchema = [`
 type Count {
   # Current amount
   amount: Int!
+  errorMessage: String
 }
 
 type Query {
@@ -53,7 +54,13 @@ const rootResolvers = {
             return count;
           });
       } else {
-        throw new Error('not admin, cannot update count!');
+        return context.counterService.getCount()
+          .then((count) => {
+            return {
+              ...count,
+              errorMessage: 'you cannot update the count',
+            };
+          });
       }
     },
   },

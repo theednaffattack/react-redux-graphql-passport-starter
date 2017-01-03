@@ -73,7 +73,11 @@ if (token) {
 const store = configureStore(initialState, client);
 const history = syncHistoryWithStore(browserHistory, store);
 
-const actions = bindActionCreators({ redirectToLoginWithMessage, signOutUser }, store.dispatch);
+const actions = bindActionCreators({
+  redirectToLoginWithMessage,
+  signOutUser,
+}, store.dispatch);
+
 setupAxiosInterceptors(() => actions.redirectToLoginWithMessage());
 
 const routes = getRoutes(actions.signOutUser, store);

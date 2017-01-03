@@ -1,14 +1,18 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { graphql, compose } from 'react-apollo';
 import gql from 'graphql-tag';
 import update from 'immutability-helper';
 import { Row, Button } from 'react-bootstrap';
 
+import { setError } from '../actions/errors';
+
 const SUBSCRIPTION_QUERY = gql`
   subscription onCountUpdated {
-  countUpdated {
-    amount
-  }
+    countUpdated {
+      amount
+      errorMessage
+    }
   }
 `;
 
@@ -19,6 +23,18 @@ class Counter extends React.Component {
     this.subscription = null;
   }
 
+  handleSetError = (message) => {
+    const { dispatch } = this.props;
+    dispatch(setError(message));
+  }
+
+  // componentDidUpdate won't work on the first error!
+  componentWillUpdate(nextProps) {
+    if (nextProps.count && nextProps.count.errorMessage) {
+      this.handleSetError(nextProps.count.errorMessage);
+    }
+  }
+
   componentWillReceiveProps(nextProps) {
     if (!this.subscription && !nextProps.loading) {
       this.subscription = this.props.subscribeToMore({
@@ -26,10 +42,14 @@ class Counter extends React.Component {
         variables: {},
         updateQuery: (previousResult, { subscriptionData }) => {
           const newAmount = subscriptionData.data.countUpdated.amount;
+          const newErrorMessage = mutationResult.data.addCount.errorMessage;
           return update(previousResult, {
             count: {
               amount: {
                 $set: newAmount,
+              },
+              errorMessage: {
+                $set: newErrorMessage || null,
               },
             },
           });
@@ -40,6 +60,7 @@ class Counter extends React.Component {
 
   render() {
     const { loading, count, addCount } = this.props;
+
     if (loading) {
       return (
         <Row>
@@ -76,6 +97,7 @@ const AMOUNT_QUERY = gql`
   query getCount {
     count {
       amount
+      errorMessage
     }
   }
 `;
@@ -86,6 +108,7 @@ const ADD_COUNT_MUTATION = gql`
   ) {
     addCount(amount: $amount) {
       amount
+      errorMessage
     }
   }
 `;
@@ -104,10 +127,14 @@ export default compose(
           updateQueries: {
             getCount: (prev, { mutationResult }) => {
               const newAmount = mutationResult.data.addCount.amount;
+              const newErrorMessage = mutationResult.data.addCount.errorMessage;
               return update(prev, {
                 count: {
                   amount: {
                     $set: newAmount,
+                  },
+                  errorMessage: {
+                    $set: newErrorMessage || null,
                   },
                 },
               });
@@ -124,4 +151,5 @@ export default compose(
       },
     }),
   }),
+  connect(),
 )(Counter);

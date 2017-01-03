@@ -23,15 +23,10 @@ class Counter extends React.Component {
     this.subscription = null;
   }
 
-  handleSetError = (message) => {
-    const { dispatch } = this.props;
-    dispatch(setError(message));
-  }
-
   // componentDidUpdate won't work on the first error!
   componentWillUpdate(nextProps) {
     if (nextProps.count && nextProps.count.errorMessage) {
-      this.handleSetError(nextProps.count.errorMessage);
+      this.props.handleSetError(nextProps.count.errorMessage);
     }
   }
 
@@ -91,6 +86,7 @@ Counter.propTypes = {
   updateCountQuery: React.PropTypes.func,
   addCount: React.PropTypes.func.isRequired,
   subscribeToMore: React.PropTypes.func.isRequired,
+  handleSetError: React.PropTypes.func.isRequired,
 };
 
 const AMOUNT_QUERY = gql`
@@ -112,6 +108,14 @@ const ADD_COUNT_MUTATION = gql`
     }
   }
 `;
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    handleSetError: (message) => {
+      dispatch(setError(message));
+    },
+  };
+};
 
 export default compose(
   graphql(AMOUNT_QUERY, {
@@ -151,5 +155,5 @@ export default compose(
       },
     }),
   }),
-  connect(),
+  connect(null, mapDispatchToProps),
 )(Counter);

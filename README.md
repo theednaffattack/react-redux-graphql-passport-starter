@@ -1,8 +1,10 @@
 # react-redux-graphql-passport-starter
 
-an example for react-redux apollo/graphql application, with passport backend support using a fake dev-only in-memory user storage.
+This is an example for react-redux apollo/graphql application, with passport backend support using a fake dev-only in-memory user storage.
 
-based on https://github.com/mtiger2k/react-redux-graphql-passport-starter but without the mongo, and with some style cleanup.
+It's based on https://github.com/mtiger2k/react-redux-graphql-passport-starter but without the mongo, and with some style cleanup.
+
+Log in as `user1` with password `pass1` and use the remote counter. Then, try using the remote counter as `user2` / `pass2` -- note the error messages.
 
 ## About
 

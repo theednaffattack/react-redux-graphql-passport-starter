@@ -46,7 +46,7 @@ npm start
 
 ```bash
 npm run build
-npm start
+# site is in dist now... go there & run `python -mSimpleHTTPServer` or whatever!
 ```
 
 ## Explanation

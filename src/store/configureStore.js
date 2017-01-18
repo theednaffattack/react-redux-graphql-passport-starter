@@ -1,7 +1,6 @@
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import { routerMiddleware } from 'react-router-redux';
 import { browserHistory } from 'react-router';
-import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
 
 import promiseMiddleware from '../middleware/promiseMiddleware';
 import getReducer from '../reducers';
@@ -11,11 +10,18 @@ const middleware = routerMiddleware(browserHistory);
 const middlewares = [applyMiddleware(promiseMiddleware, middleware)];
 
 export default function configureStore(initialState = {}, apolloClient) {
+  const hasWindow = typeof window !== 'undefined';
+
   const store = createStore(
     getReducer(apolloClient),
     initialState,
-    composeWithDevTools(applyMiddleware(apolloClient.middleware()), ...middlewares),
+    compose(
+      applyMiddleware(apolloClient.middleware()),
+      ...middlewares,
+      hasWindow && window.devToolsExtension ? window.devToolsExtension() : (f) => f,
+    ),
   );
+
   if (module.hot) {
     // Enable Webpack hot module replacement for reducers
     module.hot.accept('../reducers', () => {

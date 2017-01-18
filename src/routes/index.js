@@ -12,6 +12,8 @@ import Login from '../containers/Login';
 import fetchUser from '../actions/user';
 
 export default function getRoutes(onLogout, store, client) {
+  const hasWindow = typeof window !== 'undefined';
+
   const logout = (nextState, replace, cb) => {
     onLogout();
     if (client) {
@@ -21,7 +23,7 @@ export default function getRoutes(onLogout, store, client) {
     cb();
   };
 
-  if (store) { // from client
+  if (store && hasWindow && typeof window.localStorage !== 'undefined') { // from client
     const token = localStorage.getItem('auth-token');
     if (token !== null) {
       store.dispatch(fetchUser());

@@ -22,7 +22,7 @@ import './styles/main.scss';
 
 const PORT = (+process.env.PORT - 1) || '3000';
 const WS_PORT = process.env.WS_PORT || '8082';
-debugger;
+
 const wsClient = new Client(window.location.origin.replace(/^http/, 'ws')
   .replace(`:${PORT}`, `:${WS_PORT}`));
 

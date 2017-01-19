@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 
 import NavbarLink from '../components/NavbarLink';
 import Profile from '../components/Profile';
-import Errors from '../containers/Errors'
+import Errors from '../containers/Errors';
 
 const Layout = ({ children, /* params, */ location }) => (
   <div>

@@ -1,5 +1,6 @@
 import { merge } from 'lodash';
 import { makeExecutableSchema, addErrorLoggingToSchema } from 'graphql-tools';
+import logger from 'winston';
 import { pubsub } from './subscriptions';
 
 const rootSchema = [`
@@ -53,15 +54,15 @@ const rootResolvers = {
             pubsub.publish('countUpdated', count);
             return count;
           });
-      } else {
-        return context.counterService.getCount()
-          .then((count) => {
-            return {
-              ...count,
-              errorMessage: 'you cannot update the count',
-            };
-          });
       }
+
+      return context.counterService.getCount()
+        .then((count) => {
+          return {
+            ...count,
+            errorMessage: 'you cannot update the count',
+          };
+        });
     },
   },
   Subscription: {
@@ -82,6 +83,6 @@ const executableSchema = makeExecutableSchema({
   resolvers,
 });
 
-addErrorLoggingToSchema(executableSchema, { log: e => console.log(e) });
+addErrorLoggingToSchema(executableSchema, { log: e => logger.error(e) });
 
 export default executableSchema;

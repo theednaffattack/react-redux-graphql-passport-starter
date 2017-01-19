@@ -18,7 +18,7 @@ export default function configureStore(initialState = {}, apolloClient) {
     compose(
       applyMiddleware(apolloClient.middleware()),
       ...middlewares,
-      hasWindow && window.devToolsExtension ? window.devToolsExtension() : (f) => f,
+      hasWindow && window.devToolsExtension ? window.devToolsExtension() : f => f,
     ),
   );
 

@@ -2,5 +2,5 @@ assets
 dist
 node_modules
 coverage
-webpack.*.js
-*server.js
+webpack/*.js
+src/index.js

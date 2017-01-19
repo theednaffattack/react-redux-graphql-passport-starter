@@ -5,3 +5,4 @@ dist
 .env
 *.swp
 webpack/webpack-assets.json
+coverage

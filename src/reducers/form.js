@@ -12,4 +12,4 @@ export default function formReducer(state = {}, action) {
     default:
       return reducer(state, action);
   }
-};
+}

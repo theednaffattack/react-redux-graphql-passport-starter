@@ -24,13 +24,13 @@ const Html = ({ assets, initialState, apolloState, content }) => {
         <main id="app" dangerouslySetInnerHTML={{ __html: content }} />
         <script dangerouslySetInnerHTML={{ __html: initialState }} />
         <script dangerouslySetInnerHTML={{ __html: apolloState }} />
-        {Object.keys(assets.javascript).map((key) =>
+        {Object.keys(assets.javascript).map(key => (
           <script key={key} src={assets.javascript[key]} />
-        )}
+        ))}
       </body>
     </html>
   );
-}
+};
 
 Html.propTypes = {
   assets: PropTypes.object.isRequired,

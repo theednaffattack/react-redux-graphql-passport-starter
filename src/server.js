@@ -80,9 +80,9 @@ router.use((req, res, next) => {
       const assets = global.webpackIsomorphicTools.assets();
       const initialState = `window.__INITIAL_STATE__ = ${serialize(store.getState())}`;
 
-      const apolloStateData = {[client.reduxRootKey]: {
+      const apolloStateData = { [client.reduxRootKey]: {
         data: client.store.getState()[client.reduxRootKey].data,
-      }};
+      } };
       const apolloState = `window.__APOLLO_STATE__ = ${serialize(apolloStateData)}`;
 
 
@@ -98,6 +98,8 @@ router.use((req, res, next) => {
       console.log(err);
       res.status(500).end();
     });
+
+    return next();
   });
 });
 

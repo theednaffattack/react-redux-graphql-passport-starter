@@ -4,9 +4,13 @@ This is an example for react-redux apollo/graphql application, with passport bac
 
 It provides server-side rendering.
 
-It's based on https://github.com/mtiger2k/react-redux-graphql-passport-starter but without the mongo, and with some style cleanup.
+It's based on [mtiger2k's starterkit](https://github.com/mtiger2k/react-redux-graphql-passport-starter). I replaced their mongodb user store with a dummy store to keep things simple for experimentation. Also I changed a bunch of code layout & style.
 
-Log in as `user1` with password `pass1` and use the remote counter. Then, try using the remote counter as `user2` / `pass2` -- note the error messages.
+I added a couple authentication examples: Log in as `user1` with password `pass1` and use the remote counter. Then, try using the remote counter as `user2` / `pass2` -- note the error messages. See [api/schema.js](https://github.com/bnchdrff/react-redux-graphql-passport-starter/blob/master/api/schema.js#L49).
+
+Also, I added an example of filtering subscription events in [api/subscriptions.js](https://github.com/bnchdrff/react-redux-graphql-passport-starter/blob/master/api/subscriptions.js#L12) -- by choosing which events propagate to which clients you can save a lot of computing & network traffic.
+
+Finally I added in server-side rendering for the bits that make sense -- not the forms, yet, though!
 
 ## About
 
@@ -39,10 +43,9 @@ npm install
 
 ## Running Dev Server
 
+This will start the API server, webpack builder, and web server:
+
 ```bash
-# in one terminal session, run the API server:
-npm run start-api
-# in another terminal session, run the frontend dev server:
 npm start
 ```
 

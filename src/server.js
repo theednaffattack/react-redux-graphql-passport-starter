@@ -22,7 +22,7 @@ import Html from './components/Html';
 dotenv.config();
 
 const NODE_ENV = process.env.NODE_ENV || 'development';
-const IP = process.env.IP || '0.0.0.0';
+const IP = process.env.IP || 'localhost';
 const PORT = process.env.PORT || 3000;
 const API_URL = process.env.API_URL || 'http://localhost:8081';
 

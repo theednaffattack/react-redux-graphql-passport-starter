@@ -4,7 +4,7 @@
   "description": "demo for react-redux with graphql and hot",
   "main": "src",
   "scripts": {
-    "start": "concurrently --kill-others 'nodemon api/index.js --watch api --exec ./node_modules/.bin/babel-node' 'nodemon --watch src src' 'node webpack/webpack-dev-server.js'",
+    "start": "concurrently --kill-others \"nodemon api/index.js --watch api --exec babel-node\" \"nodemon --watch src src\" \"node webpack/webpack-dev-server.js\"",
     "prebuild": "rimraf dist",
     "build": "./node_modules/.bin/cross-env NODE_ENV=production webpack -p --optimize-dedupe --config webpack/webpack.config.js",
     "eslint": "eslint ."

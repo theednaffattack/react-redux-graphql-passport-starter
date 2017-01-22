@@ -4,7 +4,7 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 var WebpackIsomorphicToolsPlugin = require('webpack-isomorphic-tools/plugin');
 var webpackIsomorphicToolsConfig = require('./webpack-isomorphic-tools');
 
-var IP = process.env.IP || '0.0.0.0';
+var IP = process.env.IP || 'localhost';
 var PORT = (+process.env.PORT + 1) || 3001;
 var WS_PORT = (+process.env.WS_PORT) || 8082;
 var DEBUG = process.env.NODE_ENV !== 'production';

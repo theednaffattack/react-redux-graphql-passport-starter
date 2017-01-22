@@ -2,7 +2,7 @@ var webpack = require('webpack');
 var WebpackDevServer = require('webpack-dev-server');
 var config = require('./webpack.config');
 
-var IP = process.env.IP || '0.0.0.0';
+var IP = process.env.IP || 'localhost';
 var PORT = (+process.env.PORT + 1) || 3001;
 
 new WebpackDevServer(webpack(config), {

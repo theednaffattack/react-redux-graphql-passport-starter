@@ -12,6 +12,14 @@ Also, I added an example of filtering subscription events in [api/subscriptions.
 
 Finally I added in server-side rendering for the bits that make sense -- not the forms, yet, though!
 
+
+
+## Note
+
+This version only works with Node < 8!!!
+
+An issue in the node-sass package limits Node to versions below 8.
+
 ## About
 
 This is a starter boilerplate app I've put together using the following technologies:
